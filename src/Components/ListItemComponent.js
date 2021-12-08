@@ -1,11 +1,13 @@
-import React from 'react';
-import {FlexContainer} from '../Styles/Styles'
+import React from "react";
+import { FlexContainer, ListItem, colors } from "../Styles/Styles";
 
-function ListItemComponent() {
+function ListItemComponent(props) {
   return (
-    <FlexContainer orientation="h">
-      Szkolna 17 4.5kg  0.9km
-    </FlexContainer>
+    <ListItem background={props.background}>
+      <div>{props.address}</div>
+      <div>{props.weight}kg</div>
+      <div>{props.distance}km</div>
+    </ListItem>
   );
 }
 
