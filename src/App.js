@@ -1,5 +1,7 @@
 import React from "react";
 import HomePage from "./Components/HomePage";
+import ClientRegistration from "./Components/ClientRegistration";
+
 import { GlobalStyles, BodyContainer } from "./Styles/Styles";
 import { initializeApp } from "firebase/app";
 
@@ -17,7 +19,8 @@ function App() {
   return (
     <BodyContainer orientation="v">
       <GlobalStyles></GlobalStyles>
-      <HomePage></HomePage>
+      {/* <HomePage></HomePage> */}
+      <ClientRegistration></ClientRegistration>
     </BodyContainer>
   );
 }

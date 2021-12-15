@@ -134,3 +134,87 @@ export const IconStyle = {
   width: "36",
   height: "36",
 };
+
+export const UndrawIconStyle = {
+  width: "90%",
+  minWidth: "100",
+  maxWidth: "500",
+  aspectRatio: "1:1",
+};
+
+export const FormStyle = {
+  width: "100%",
+
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+export const Input = styled.input`
+  width: 95%;
+  height: fit-content;
+
+  background-color: ${colors.lightBlue};
+  border: none;
+  outline: none;
+  border-radius: 1.5rem;
+
+  text-align: center;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+
+  padding: 1rem;
+  margin-top: 0.5rem;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  transition: all 200ms ease-in-out;
+
+  &::placeholder {
+    background-color: ${colors.lightBlue};
+    color: ${colors.darkBlue};
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: #000;
+  }
+
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /*your box-shadow*/
+    -webkit-text-fill-color: #000;
+  }
+
+  &:focus {
+    transform: scale(1.05);
+  }
+`;
+
+export const Button = styled.input`
+  width: fit-content;
+  height: fit-content;
+  justify-self: flex-end;
+
+  background-color: ${colors.darkBlue};
+  border: none;
+  outline: none;
+  border-radius: 1.3rem;
+
+  text-align: center;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+
+  padding: 1rem 1.5rem;
+  margin-top: 3rem;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
