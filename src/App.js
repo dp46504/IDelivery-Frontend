@@ -2,8 +2,11 @@ import React from "react";
 import HomePage from "./Components/HomePage";
 import ClientRegistration from "./Components/ClientRegistration";
 
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+
 import { GlobalStyles, BodyContainer } from "./Styles/Styles";
 import { initializeApp } from "firebase/app";
+import Map from "./Components/Map";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCKqHgxhII49ov4Q2Kti99cPLaQlC_cMzE",
@@ -19,8 +22,17 @@ function App() {
   return (
     <BodyContainer orientation="v">
       <GlobalStyles></GlobalStyles>
-      {/* <HomePage></HomePage> */}
-      <ClientRegistration></ClientRegistration>
+
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<HomePage />}></Route>
+          <Route
+            path="/client_registration"
+            element={<ClientRegistration />}
+          ></Route>
+          <Route path="/map" element={<Map />}></Route>
+        </Routes>
+      </Router>
     </BodyContainer>
   );
 }

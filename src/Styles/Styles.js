@@ -1,10 +1,14 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { NavLink } from "react-router-dom";
+import { MapContainer } from "react-leaflet";
 
 export const colors = {
   darkBlue: "#31A2C6",
   lightBlue: "#ADDCEB",
+  lighterBlue: "#DBECF1",
   lightYellow: "#FFD56A",
   darkYellow: "#DEAE33",
+  shadow1: "rgba(0,0,0,0.1)",
 };
 
 const globalPadding = "1rem";
@@ -106,26 +110,30 @@ export const MenuContainer = styled.div`
   left: 0;
   width: 100%;
   height: 4rem;
+  z-index: 100;
 `;
 
-export const MenuItem = styled.div`
+export const MenuItem = styled(NavLink)`
+  text-decoration: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => {
-    return props.active ? colors.darkBlue : "white";
-  }};
-  color: ${(props) => {
-    return props.active ? "white" : colors.darkBlue;
-  }};
+  background-color: white;
+  color: ${colors.darkBlue};
   font-weight: 700;
   padding: 0.5rem 1rem;
   border-radius: 1.2rem;
   & .icon {
-    fill: ${(props) => {
-      return props.active ? "white" : colors.darkBlue;
-    }};
+    fill: ${colors.darkBlue};
+  }
+
+  &.active {
+    background-color: ${colors.darkBlue};
+    color: white;
+    & .icon {
+      fill: white;
+    }
   }
 `;
 
@@ -217,4 +225,49 @@ export const Button = styled.input`
   &:hover {
     transform: scale(1.05);
   }
+`;
+
+export const SearchBar = styled.input`
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  height: 3.25rem;
+  background-color: ${colors.lighterBlue};
+  border-radius: 1.5rem;
+  border: none;
+  box-shadow: 0.5rem 0.5rem 1rem ${colors.shadow1};
+  outline: none;
+  padding-left: 5rem;
+  font-size: 1.3rem;
+  color: ${colors.darkBlue};
+  letter-spacing: 0.05rem;
+  z-index: 100;
+`;
+
+export const SearchIconStyle = {
+  width: "2rem",
+  height: "2rem",
+  position: "absolute",
+  top: `calc(0.2rem + ${globalPadding})`,
+  left: `calc(0.5rem + ${globalPadding})`,
+  zIndex: 100,
+};
+
+export const XIconStyle = {
+  width: "1.5rem",
+  height: "1.5rem",
+  position: "absolute",
+  top: `calc(0.3rem + ${globalPadding})`,
+  right: `calc(0.5rem + ${globalPadding})`,
+  zIndex: 100,
+};
+
+export const MapContainerStyled = styled(MapContainer)`
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
