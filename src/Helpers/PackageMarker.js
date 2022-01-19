@@ -1,13 +1,27 @@
 import L from "leaflet";
+import packageIconSelected from "../Icons/package-pin-icon-selected.svg";
+import packageIconNormal from "../Icons/package-pin-icon-normal.svg";
 
-const PackageMarker = new L.Icon({
-  iconUrl: require("../Icons/package-pin-icon.svg"),
-  iconAnchor: [32, 64],
+const PackageMarkerSelected = new L.Icon({
+  iconUrl: packageIconSelected,
+  iconRetinaUrl: packageIconSelected,
+  iconAnchor: null,
   popupAnchor: null,
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  iconSize: [64, 64],
+  iconSize: new L.Point(50, 50),
 });
 
-export default PackageMarker;
+const PackageMarkerNormal = new L.Icon({
+  iconUrl: packageIconNormal,
+  iconRetinaUrl: packageIconNormal,
+  iconAnchor: null,
+  popupAnchor: null,
+  shadowUrl: null,
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: new L.Point(50, 50),
+});
+
+export { PackageMarkerSelected, PackageMarkerNormal };
