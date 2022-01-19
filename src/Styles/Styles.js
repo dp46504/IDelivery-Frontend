@@ -200,6 +200,58 @@ export const Input = styled.input`
   }
 `;
 
+export const InputPhoto = styled.div`
+  width: 95%;
+  height: fit-content;
+
+  background-color: ${colors.lightBlue};
+
+  border: none;
+  border-radius: 1.5rem;
+
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  color: #000;
+
+  padding: 1rem;
+  margin-top: 0.5rem;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  transition: all 200ms ease-in-out;
+
+  & input[type="file"] {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    max-width: fit-content;
+  }
+
+  & input[type="file"]::-webkit-file-upload-button {
+    display: none;
+  }
+
+  & input[type="file"]::placeholder {
+    background-color: ${colors.lightBlue};
+    color: ${colors.darkBlue};
+  }
+
+  & input[type="file"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: #000;
+  }
+
+  & input[type="file"]:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /*your box-shadow*/
+    -webkit-text-fill-color: #000;
+  }
+`;
+
 export const Button = styled.input`
   width: fit-content;
   height: fit-content;
