@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MenuComponents from "./MenuComponents";
 import {
   SearchBar,
@@ -6,10 +6,8 @@ import {
   SearchIconStyle,
   XIconStyle,
   MapContainerStyled,
-  Button,
 } from "../Styles/Styles";
-import { TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
+import { TileLayer, Marker } from "react-leaflet";
 import { ReactComponent as SearchIcon } from "../Icons/search-icon.svg";
 import { ReactComponent as XIcon } from "../Icons/x-icon.svg";
 import {
@@ -20,11 +18,6 @@ import {
 function Map(props) {
   let [address, setAddress] = useState("");
   const [position, setPosition] = useState([53.43276, 14.54815]);
-  const [map, setMap] = useState(null);
-
-  const checkMap = () => {
-    document.getElementById("map");
-  };
 
   return (
     <>
@@ -56,18 +49,18 @@ function Map(props) {
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker
-          icon={PackageMarkerSelected}
-          position={[51.505, -0.09]}
+          icon={PackageMarkerNormal}
+          position={[53.4345, 14.54815]}
         ></Marker>
-        <Marker icon={PackageMarkerNormal} position={[51.506, -0.09]}></Marker>
+        <Marker
+          icon={PackageMarkerNormal}
+          position={[53.4342, 14.54885]}
+        ></Marker>
+        <Marker
+          icon={PackageMarkerNormal}
+          position={[53.43355, 14.5486]}
+        ></Marker>
       </MapContainerStyled>
-      <Button
-        style={{ position: "absolute", top: "100px", left: 0 }}
-        onClick={() => {
-          checkMap();
-        }}
-        value="Get"
-      ></Button>
     </>
   );
 }
