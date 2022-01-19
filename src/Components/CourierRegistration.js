@@ -9,9 +9,9 @@ import {
   Button,
   colors,
 } from '../Styles/Styles'
-import { ReactComponent as ClientRegIcon } from '../Icons/client-reg-icon.svg'
+import { ReactComponent as CourierRegIcon } from '../Icons/courier-reg-icon.svg'
 
-function ClientRegistration(props) {
+function CourierRegistration(props) {
   const { register, handleSubmit } = useForm()
   const onSubmit = (data) => {
     if (data.confirmPasword !== data.password)
@@ -23,7 +23,7 @@ function ClientRegistration(props) {
   return (
     <>
       <FlexContainer orientation='v' height='100%'>
-        {/* Title Client Registration*/}
+        {/* Title Courier Registration*/}
         <div
           style={{
             color: colors.darkBlue,
@@ -31,11 +31,11 @@ function ClientRegistration(props) {
             fontWeight: 'bold',
             textShadow: '0.5rem 0.5rem 1rem rgba(0,0,0,0.25)',
           }}>
-          Client Registration
+          Courier Registration
         </div>
-        <ClientRegIcon
+        <CourierRegIcon
           className='icon'
-          style={(UndrawIconStyle, { marginTop: '2rem' })}></ClientRegIcon>
+          style={(UndrawIconStyle, { marginTop: '2rem' })}></CourierRegIcon>
 
         <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -58,6 +58,10 @@ function ClientRegistration(props) {
             type='password'
             placeholder='Confirm Password'
             {...register('confirmPasword', { required: true })}></Input>
+          <Input
+            type='file'
+            placeholder='Scan of personal document'
+            {...register('personalDocument', { required: true })}></Input>
           <Button type='submit' value='Submit'></Button>
         </form>
       </FlexContainer>
@@ -65,4 +69,4 @@ function ClientRegistration(props) {
   )
 }
 
-export default ClientRegistration
+export default CourierRegistration
