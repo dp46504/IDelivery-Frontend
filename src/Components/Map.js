@@ -1,36 +1,40 @@
-import React, { useState, useEffect } from "react";
-import MenuComponents from "./MenuComponents";
+import React, { useState, useEffect, useRef } from 'react'
+import MenuComponents from './MenuComponents'
 import {
   SearchBar,
   colors,
   SearchIconStyle,
   XIconStyle,
   MapContainerStyled,
-} from "../Styles/Styles";
-import { TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-import { ReactComponent as SearchIcon } from "../Icons/search-icon.svg";
-import { ReactComponent as XIcon } from "../Icons/x-icon.svg";
+} from '../Styles/Styles'
+import { TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import { ReactComponent as SearchIcon } from '../Icons/search-icon.svg'
+import { ReactComponent as XIcon } from '../Icons/x-icon.svg'
 import {
   PackageMarkerSelected,
   PackageMarkerNormal,
-} from "../Helpers/PackageMarker";
+} from '../Helpers/PackageMarker'
 
 function Map(props) {
+  let mapRef = useRef(null)
+
   const getLocation = () => {
     // Getting permission
 
     // Setting initial position
-    let positionResult = [];
+    let positionResult = []
     navigator.geolocation.getCurrentPosition((result) => {
-      positionResult.push(result.coords.latitude);
-      positionResult.push(result.coords.longitude);
-    });
-    return positionResult;
-  };
+      positionResult.push(result.coords.latitude)
+      positionResult.push(result.coords.longitude)
+    })
+    mapRef.current.center = positionResult
 
-  let [address, setAddress] = useState("");
-  const [position, setPosittion] = useState(getLocation());
+    return positionResult
+  }
+
+  let [address, setAddress] = useState('')
+  const [position, setPosittion] = useState(getLocation())
 
   return (
     <>
@@ -41,33 +45,30 @@ function Map(props) {
       <SearchBar
         value={address}
         onChange={(e) => {
-          setAddress(e.target.value);
-        }}
-      ></SearchBar>
+          setAddress(e.target.value)
+        }}></SearchBar>
       <SearchIcon fill={colors.darkBlue} style={SearchIconStyle}></SearchIcon>
       <XIcon
         onClick={() => {
-          setAddress("");
+          setAddress('')
         }}
         fill={colors.darkBlue}
-        style={XIconStyle}
-      ></XIcon>
+        style={XIconStyle}></XIcon>
 
       <MapContainerStyled
-        center={position}
+        ref={mapRef}
+        center={[53.43276, 14.54815]}
         zoom={20}
         scrollWheelZoom={true}
-        zoomControl={false}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        zoomControl={false}>
+        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <Marker
           icon={PackageMarkerSelected}
-          position={[51.505, -0.09]}
-        ></Marker>
+          position={[51.505, -0.09]}></Marker>
         <Marker icon={PackageMarkerNormal} position={[51.506, -0.09]}></Marker>
       </MapContainerStyled>
     </>
-  );
+  )
 }
 
-export default Map;
+export default Map
