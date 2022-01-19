@@ -26,7 +26,6 @@ function Map(props) {
       positionResult.push(result.coords.latitude);
       positionResult.push(result.coords.longitude);
     });
-    console.log(positionResult);
     return positionResult;
   };
 
