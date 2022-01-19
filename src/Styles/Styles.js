@@ -88,9 +88,10 @@ export const GearIconStyle = {
 
 export const ListItem = styled.div`
   width: 95%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  place-items: center;
+
   background-color: ${(props) => {
     return props.background ? props.background : colors.lightBlue;
   }};
