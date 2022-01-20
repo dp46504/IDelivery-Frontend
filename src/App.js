@@ -1,13 +1,12 @@
 import React from 'react'
 import CourierHomePage from './Components/CourierHomePage'
+import ClientHomePage from './Components/ClientHomePage'
 import ClientRegistration from './Components/ClientRegistration'
 import CourierRegistration from './Components/CourierRegistration'
 import Login from './Components/Login'
 import ViewList from './Helpers/ViewList'
 import CourierPackages from './Components/CourierPackages'
-
-import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { GlobalStyles, BodyContainer } from './Styles/Styles'
 import { initializeApp } from 'firebase/app'
 import Map from './Components/Map'
@@ -30,6 +29,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/courier_homepage' element={<CourierHomePage />}></Route>
+          <Route path='/client_homepage' element={<ClientHomePage />}></Route>
           <Route
             path='/client_registration'
             element={<ClientRegistration />}></Route>

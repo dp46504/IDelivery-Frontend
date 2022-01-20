@@ -5,6 +5,7 @@ export default function ViewList(props) {
   return (
     <>
       <Link to='/courier_homepage'>COURIER HOMEPAGE</Link>
+      <Link to='/client_homepage'>CLIENT HOMEPAGE</Link>
       <Link to='/client_registration'>CLIENT REGISTRATION</Link>
       <Link to='/courier_registration'>COURIER REGISTRATION</Link>
       <Link to='/login'>LOG IN</Link>
