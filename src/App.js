@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalStyles, BodyContainer } from "./Styles/Styles";
 import { initializeApp } from "firebase/app";
 import Map from "./Components/Map";
+import ProtectedRoutes from "./Helpers/ProtectedRoutes";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCKqHgxhII49ov4Q2Kti99cPLaQlC_cMzE",
@@ -29,8 +30,26 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/courier_homepage" element={<CourierHomePage />}></Route>
-          <Route path="/client_homepage" element={<ClientHomePage />}></Route>
+          {/* Private Routes */}
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/courier_homepage"
+              element={<CourierHomePage />}
+            ></Route>
+            <Route path="/client_homepage" element={<ClientHomePage />}></Route>
+
+            <Route
+              path="/courier_packages"
+              element={<CourierPackages />}
+            ></Route>
+            <Route path="/map" element={<Map />}></Route>
+            <Route
+              path="/adding_package"
+              element={<ClientAddPackage />}
+            ></Route>
+          </Route>
+
+          <Route exact path="/" element={<ViewList />}></Route>
           <Route
             path="/client_registration"
             element={<ClientRegistration />}
@@ -40,10 +59,6 @@ function App() {
             element={<CourierRegistration />}
           ></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/courier_packages" element={<CourierPackages />}></Route>
-          <Route path="/map" element={<Map />}></Route>
-          <Route path="/adding_package" element={<ClientAddPackage />}></Route>
-          <Route path="/" element={<ViewList />}></Route>
         </Routes>
       </Router>
     </BodyContainer>

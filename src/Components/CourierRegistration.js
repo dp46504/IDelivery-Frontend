@@ -14,11 +14,31 @@ import { ReactComponent as CourierRegIcon } from "../Icons/courier-reg-icon.svg"
 
 function CourierRegistration(props) {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (data.confirmPasword !== data.password)
       return alert("Passwords do not match!");
-
-    // TODO Send to back-end :^)
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        email: data.email,
+        name: data.name,
+        lastname: data.lastname,
+        password: data.password,
+      }),
+    };
+    fetch(
+      "http://vps-143d0992.vps.ovh.net:8000/api/user/courier-register",
+      options
+    ).then((result) => {
+      if (result.status === 200) {
+        alert("Courier registered");
+      } else {
+        alert("Something went wrong");
+      }
+    });
   };
 
   return (
@@ -54,10 +74,6 @@ function CourierRegistration(props) {
             {...register("email", { required: true })}
           ></Input>
           <Input
-            placeholder="Address"
-            {...register("address", { required: true })}
-          ></Input>
-          <Input
             type="password"
             placeholder="Password"
             {...register("password", { required: true })}
@@ -71,7 +87,7 @@ function CourierRegistration(props) {
             <input
               type="file"
               placeholder="Scan of personal document"
-              {...register("personalDocument", { required: true })}
+              {...register("personalDocument")}
             ></input>
           </InputPhoto>
           <Button type="submit" value="Submit"></Button>

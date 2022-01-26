@@ -1,5 +1,5 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import React from "react";
+import { useForm } from "react-hook-form";
 
 import {
   FlexContainer,
@@ -8,61 +8,112 @@ import {
   Input,
   Button,
   colors,
-} from '../Styles/Styles'
-import { ReactComponent as ClientRegIcon } from '../Icons/client-reg-icon.svg'
+} from "../Styles/Styles";
+import { ReactComponent as ClientRegIcon } from "../Icons/client-reg-icon.svg";
 
 function ClientRegistration(props) {
-  const { register, handleSubmit } = useForm()
-  const onSubmit = (data) => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
     if (data.confirmPasword !== data.password)
-      return alert('Passwords do not match!')
-
-    // TODO Send to back-end :^)
-  }
+      return alert("Passwords do not match!");
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        email: data.email,
+        name: data.name,
+        lastname: data.lastname,
+        address: {
+          country: data.country,
+          city: data.city,
+          street: data.street,
+          flatNumber: data.flatnumber,
+          postCode: data.postcode,
+        },
+        password: data.password,
+      }),
+    };
+    fetch(
+      "http://vps-143d0992.vps.ovh.net:8000/api/user/client-register",
+      options
+    ).then((result) => {
+      if (result.status === 200) {
+        alert("Client registered");
+      } else {
+        alert("Something went wrong");
+      }
+    });
+  };
 
   return (
     <>
-      <FlexContainer orientation='v' height='100%'>
+      <FlexContainer orientation="v" height="100%">
         {/* Title Client Registration*/}
         <div
           style={{
             color: colors.darkBlue,
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            textShadow: '0.5rem 0.5rem 1rem rgba(0,0,0,0.25)',
-          }}>
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+          }}
+        >
           Client Registration
         </div>
         <ClientRegIcon
-          className='icon'
-          style={(UndrawIconStyle, { marginTop: '2rem' })}></ClientRegIcon>
+          className="icon"
+          style={(UndrawIconStyle, { marginTop: "2rem" })}
+        ></ClientRegIcon>
 
         <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
           <Input
-            placeholder='Name'
-            {...register('name', { required: true })}></Input>
+            placeholder="Name"
+            {...register("name", { required: true })}
+          ></Input>
           <Input
-            placeholder='Lastname'
-            {...register('lastname', { required: true })}></Input>
+            placeholder="Lastname"
+            {...register("lastname", { required: true })}
+          ></Input>
           <Input
-            placeholder='E-mail'
-            {...register('email', { required: true })}></Input>
+            placeholder="E-mail"
+            {...register("email", { required: true })}
+          ></Input>
           <Input
-            placeholder='Address'
-            {...register('address', { required: true })}></Input>
+            placeholder="Street"
+            {...register("street", { required: true })}
+          ></Input>
           <Input
-            type='password'
-            placeholder='Password'
-            {...register('password', { required: true })}></Input>
+            placeholder="Flat Number"
+            {...register("flatnumber", { required: true })}
+          ></Input>
           <Input
-            type='password'
-            placeholder='Confirm Password'
-            {...register('confirmPasword', { required: true })}></Input>
-          <Button type='submit' value='Submit'></Button>
+            placeholder="Post Code"
+            {...register("postcode", { required: true })}
+          ></Input>
+          <Input
+            placeholder="City"
+            {...register("city", { required: true })}
+          ></Input>
+          <Input
+            placeholder="Country"
+            {...register("country", { required: true })}
+          ></Input>
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register("password", { required: true })}
+          ></Input>
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            {...register("confirmPasword", { required: true })}
+          ></Input>
+          <Button type="submit" value="Submit"></Button>
         </form>
       </FlexContainer>
     </>
-  )
+  );
 }
 
-export default ClientRegistration
+export default ClientRegistration;

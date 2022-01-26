@@ -5,8 +5,8 @@ function ListItemComponent(props) {
   return (
     <ListItem background={props.background}>
       <div>{props.address}</div>
-      <div>{props.weight}kg</div>
-      <div>{props.distance}km</div>
+      <div>{props.weight}</div>
+      <div>{props.distance}</div>
     </ListItem>
   );
 }
