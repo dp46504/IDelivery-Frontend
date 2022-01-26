@@ -3,9 +3,11 @@ import { FlexContainer, GearIconStyle, colors } from "../Styles/Styles";
 import { ReactComponent as GearIcon } from "../Icons/gear-icon.svg";
 import ListItemComponent from "./ListItemComponent";
 import MenuComponents from "./MenuComponents";
+import { useNavigate } from "react-router-dom";
 
 function ClientHomePage(props) {
   const [packages, setPackages] = useState([]);
+  let history = useNavigate();
 
   useEffect(() => {
     const getPackagesInfo = async () => {
@@ -41,6 +43,10 @@ function ClientHomePage(props) {
           setPackages(data);
         });
     };
+
+    if (localStorage.getItem("account-type") !== "client") {
+      history("/login");
+    }
     getPackagesInfo();
   }, []);
   return (
@@ -59,7 +65,7 @@ function ClientHomePage(props) {
           textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
         }}
       >
-        Hello, Wojciech!
+        {`Hello ${localStorage.getItem("user-name")}`}
       </div>
 
       {/* errands container */}

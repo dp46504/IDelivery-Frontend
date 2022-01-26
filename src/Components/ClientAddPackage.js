@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -17,6 +17,11 @@ import { useNavigate } from "react-router-dom";
 function ClientAddPackage(props) {
   let history = useNavigate();
   const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    if (localStorage.getItem("account-type") !== "client") {
+      history("/login");
+    }
+  }, []);
   const onSubmit = (data) => {
     if (data.confirmPasword !== data.password)
       return alert("Passwords do not match!");

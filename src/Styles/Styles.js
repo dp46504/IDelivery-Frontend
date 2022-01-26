@@ -292,6 +292,7 @@ export const Button = styled.input`
 
   padding: 1rem 1.5rem;
   margin-top: 3rem;
+  margin-bottom: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
 
   cursor: pointer;

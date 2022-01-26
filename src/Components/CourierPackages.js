@@ -1,50 +1,62 @@
-import React, { useState } from 'react'
-import ListItemComponent from './ListItemComponent'
-import { FlexContainer, colors, RefreshIconStyle } from '../Styles/Styles'
-import MenuComponents from './MenuComponents'
-import { ReactComponent as MainLogo } from '../Icons/main-logo-icon.svg'
+import React, { useState, useEffect } from "react";
+import ListItemComponent from "./ListItemComponent";
+import { FlexContainer, colors, RefreshIconStyle } from "../Styles/Styles";
+import MenuComponents from "./MenuComponents";
+import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 const Courierpackages = () => {
-  const [isPackages, setIsPackages] = useState(false)
+  const [isPackages, setIsPackages] = useState(false);
+  let history = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("account-type") !== "courier") {
+      history("/login");
+    }
+  }, []);
   return (
     <>
       <MenuComponents></MenuComponents>
       {/* List of packages nearby */}
-      <FlexContainer orientation='v' height='100%'>
+      <FlexContainer orientation="v" height="100%">
         {isPackages === true ? (
           <>
             <ListItemComponent
-              address='Szkolna 17'
-              weight='4.5'
-              distance='0.9'
-              background={colors.lightBlue}></ListItemComponent>
+              address="Szkolna 17"
+              weight="4.5"
+              distance="0.9"
+              background={colors.lightBlue}
+            ></ListItemComponent>
             <ListItemComponent
-              address='Szkolna 18'
-              weight='3.2'
-              distance='0.5'
-              background={colors.lightYellow}></ListItemComponent>
+              address="Szkolna 18"
+              weight="3.2"
+              distance="0.5"
+              background={colors.lightYellow}
+            ></ListItemComponent>
             <ListItemComponent
-              address='Szkolna 19'
-              weight='4.4'
-              distance='0.9'
-              background={colors.lightBlue}></ListItemComponent>
+              address="Szkolna 19"
+              weight="4.4"
+              distance="0.9"
+              background={colors.lightBlue}
+            ></ListItemComponent>
             <ListItemComponent
-              address='Szkolna 20'
-              weight='3.5'
-              distance='1'
-              background={colors.lightBlue}></ListItemComponent>
+              address="Szkolna 20"
+              weight="3.5"
+              distance="1"
+              background={colors.lightBlue}
+            ></ListItemComponent>
           </>
         ) : (
           <>
-            <MainLogo className='icon'></MainLogo>
+            <MainLogo className="icon"></MainLogo>
             <div
               style={{
                 color: colors.darkBlue,
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                textShadow: '0.5rem 0.5rem 1rem rgba(0,0,0,0.25)',
-                textAlign: 'center',
-              }}>
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+                textAlign: "center",
+              }}
+            >
               There is nothing to deliver.
               <br />
               Come back later.
@@ -54,7 +66,7 @@ const Courierpackages = () => {
         )}
       </FlexContainer>
     </>
-  )
-}
+  );
+};
 
-export default Courierpackages
+export default Courierpackages;

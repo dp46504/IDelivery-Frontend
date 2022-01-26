@@ -21,7 +21,7 @@ function ProtectedRoutes(props) {
         },
         method: "POST",
       };
-      fetch("http://vps-143d0992.vps.ovh.net:8000/api/user/test", options)
+      fetch("http://vps-143d0992.vps.ovh.net:8000/api/user/info", options)
         .then((result) => {
           console.log("CHECKING");
           if (result.status === 200) {
@@ -37,10 +37,12 @@ function ProtectedRoutes(props) {
           if (data === false) {
             localStorage.removeItem("account-type");
             localStorage.removeItem("access-token");
+            localStorage.removeItem("user-name");
             setAuth(false);
             return false;
           } else {
             localStorage.setItem("account-type", data.role);
+            localStorage.setItem("user-name", data.name);
             setAuth(true);
             return true;
           }
