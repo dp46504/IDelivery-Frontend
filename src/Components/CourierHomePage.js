@@ -17,7 +17,13 @@ function CourierHomePage(props) {
   return (
     <>
       {/* GearIcon */}
-      <GearIcon fill={colors.darkBlue} style={GearIconStyle} />
+      <GearIcon
+        fill={colors.darkBlue}
+        style={GearIconStyle}
+        onClick={() => {
+          history("/settings");
+        }}
+      />
       {/* Menu Component */}
       <MenuComponents></MenuComponents>
 

@@ -134,6 +134,7 @@ export const GearIconStyle = {
   width: "2rem",
   height: "2rem",
 
+  cursor: "pointer",
   position: "absolute",
   top: globalPadding,
   right: globalPadding,
@@ -143,6 +144,7 @@ export const LeftArrowIconStyle = {
   width: "2rem",
   height: "2rem",
 
+  cursor: "pointer",
   position: "absolute",
   top: globalPadding,
   left: globalPadding,

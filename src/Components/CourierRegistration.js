@@ -11,6 +11,7 @@ import {
   InputPhoto,
 } from "../Styles/Styles";
 import { ReactComponent as CourierRegIcon } from "../Icons/courier-reg-icon.svg";
+import variables from "../Variables";
 
 function CourierRegistration(props) {
   const { register, handleSubmit } = useForm();
@@ -29,16 +30,15 @@ function CourierRegistration(props) {
         password: data.password,
       }),
     };
-    fetch(
-      "http://vps-143d0992.vps.ovh.net:8000/api/user/courier-register",
-      options
-    ).then((result) => {
-      if (result.status === 200) {
-        alert("Courier registered");
-      } else {
-        alert("Something went wrong");
+    fetch(`${variables.endpoint}/api/user/courier-register`, options).then(
+      (result) => {
+        if (result.status === 200) {
+          alert("Courier registered");
+        } else {
+          alert("Something went wrong");
+        }
       }
-    });
+    );
   };
 
   return (

@@ -11,6 +11,7 @@ import {
 } from "../Styles/Styles";
 import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
 import { useNavigate } from "react-router-dom";
+import variables from "../Variables";
 
 function Login(props) {
   const { register, handleSubmit } = useForm();
@@ -27,7 +28,7 @@ function Login(props) {
         password: data.password,
       }),
     };
-    fetch("http://vps-143d0992.vps.ovh.net:8000/api/user/login", options)
+    fetch(`${variables.endpoint}/api/user/login`, options)
       .then((result) => {
         if (result.status === 200) {
           return result.json();

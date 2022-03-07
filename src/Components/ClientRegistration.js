@@ -10,6 +10,7 @@ import {
   colors,
 } from "../Styles/Styles";
 import { ReactComponent as ClientRegIcon } from "../Icons/client-reg-icon.svg";
+import variables from "../Variables";
 
 function ClientRegistration(props) {
   const { register, handleSubmit } = useForm();
@@ -35,16 +36,15 @@ function ClientRegistration(props) {
         password: data.password,
       }),
     };
-    fetch(
-      "http://vps-143d0992.vps.ovh.net:8000/api/user/client-register",
-      options
-    ).then((result) => {
-      if (result.status === 200) {
-        alert("Client registered");
-      } else {
-        alert("Something went wrong");
+    fetch(`${variables.endpoint}/api/user/client-register`, options).then(
+      (result) => {
+        if (result.status === 200) {
+          alert("Client registered");
+        } else {
+          alert("Something went wrong");
+        }
       }
-    });
+    );
   };
 
   return (

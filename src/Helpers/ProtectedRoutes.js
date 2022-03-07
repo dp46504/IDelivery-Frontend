@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Login from "../Components/Login";
 import { useNavigate } from "react-router-dom";
+import variables from "../Variables";
 
 function ProtectedRoutes(props) {
   const [auth, setAuth] = useState(); // initially undefined
@@ -21,7 +22,7 @@ function ProtectedRoutes(props) {
         },
         method: "POST",
       };
-      fetch("http://vps-143d0992.vps.ovh.net:8000/api/user/info", options)
+      fetch(`${variables.endpoint}/api/user/info`, options)
         .then((result) => {
           console.log("CHECKING");
           if (result.status === 200) {

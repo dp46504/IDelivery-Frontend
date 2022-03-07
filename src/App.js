@@ -4,6 +4,7 @@ import ClientHomePage from "./Components/ClientHomePage";
 import ClientRegistration from "./Components/ClientRegistration";
 import CourierRegistration from "./Components/CourierRegistration";
 import ClientAddPackage from "./Components/ClientAddPackage";
+import RateCourier from "./Components/RateCourier";
 import Login from "./Components/Login";
 import ViewList from "./Helpers/ViewList";
 import CourierPackages from "./Components/CourierPackages";
@@ -12,6 +13,7 @@ import { GlobalStyles, BodyContainer } from "./Styles/Styles";
 import { initializeApp } from "firebase/app";
 import Map from "./Components/Map";
 import ProtectedRoutes from "./Helpers/ProtectedRoutes";
+import Settings from "./Components/Settings";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCKqHgxhII49ov4Q2Kti99cPLaQlC_cMzE",
@@ -37,6 +39,7 @@ function App() {
               element={<CourierHomePage />}
             ></Route>
             <Route path="/client_homepage" element={<ClientHomePage />}></Route>
+            <Route path="/settings" element={<Settings />}></Route>
 
             <Route
               path="/courier_packages"
@@ -47,6 +50,7 @@ function App() {
               path="/adding_package"
               element={<ClientAddPackage />}
             ></Route>
+            <Route path="/rate_courier" element={<RateCourier />}></Route>
           </Route>
 
           <Route exact path="/" element={<ViewList />}></Route>

@@ -4,6 +4,7 @@ import { ReactComponent as GearIcon } from "../Icons/gear-icon.svg";
 import ListItemComponent from "./ListItemComponent";
 import MenuComponents from "./MenuComponents";
 import { useNavigate } from "react-router-dom";
+import variables from "../Variables";
 
 function ClientHomePage(props) {
   const [packages, setPackages] = useState([]);
@@ -24,10 +25,7 @@ function ClientHomePage(props) {
         method: "GET",
       };
 
-      fetch(
-        "http://vps-143d0992.vps.ovh.net:8000/api/user/client-errands",
-        options
-      )
+      fetch(`${variables.endpoint}/api/user/client-errands`, options)
         .then((response) => {
           if (response.status === 200) {
             return response.json();
@@ -52,7 +50,13 @@ function ClientHomePage(props) {
   return (
     <>
       {/* GearIcon */}
-      <GearIcon fill={colors.darkBlue} style={GearIconStyle} />
+      <GearIcon
+        fill={colors.darkBlue}
+        style={GearIconStyle}
+        onClick={() => {
+          history("/settings");
+        }}
+      />
       {/* Menu Component */}
       <MenuComponents></MenuComponents>
 
