@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import {
   FlexContainer,
   colors,
@@ -23,6 +23,84 @@ function RateCourier(props) {
 
     // TODO Send to back-end :^)
   };
+  const [rate, setRate] = useState(5)
+  const [stars,setStars] = useState([
+    <FullStarIcon
+          onClick={()=>{
+            setRate(1)
+          }}
+            style={{
+              width: 50,
+              height: 50,
+              margin: "0.2rem",
+            }}
+          ></FullStarIcon>,<FullStarIcon
+          onClick={()=>{
+            setRate(2)
+          }}
+            style={{
+              width: 50,
+              height: 50,
+              margin: "0.2rem",
+            }}
+          ></FullStarIcon>,<FullStarIcon
+          onClick={()=>{
+            setRate(3)
+          }}
+            style={{
+              width: 50,
+              height: 50,
+              margin: "0.2rem",
+            }}
+          ></FullStarIcon>,<FullStarIcon
+          onClick={()=>{
+            setRate(4)
+          }}
+            style={{
+              width: 50,
+              height: 50,
+              margin: "0.2rem",
+            }}
+          ></FullStarIcon>,<FullStarIcon
+          onClick={()=>{
+            setRate(5)
+          }}
+            style={{
+              width: 50,
+              height: 50,
+              margin: "0.2rem",
+            }}
+          ></FullStarIcon>
+  ])
+
+  useEffect(() => {
+    let children = []
+    for(let i=1;i<=rate;i++){
+      children.push(<FullStarIcon
+        onClick={()=>{
+          setRate(i)
+        }}
+          style={{
+            width: 50,
+            height: 50,
+            margin: "0.2rem",
+          }}
+        ></FullStarIcon>)
+    }
+    for(let i=rate+1;i<=5;i++){
+      children.push(<EmptyStarIcon
+        onClick={()=>{
+          setRate(i)
+        }}
+          style={{
+            width: 50,
+            height: 50,
+            margin: "0.2rem",
+          }}
+        ></EmptyStarIcon>)
+    } 
+    setStars(children)
+  },[rate])
 
   return (
     <>
@@ -69,41 +147,7 @@ function RateCourier(props) {
           width="100%"
           style={{ justifyContent: "center" }}
         >
-          <FullStarIcon
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>
-          <FullStarIcon
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>
-          <FullStarIcon
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>
-          <FullStarIcon
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>
-          <EmptyStarIcon
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></EmptyStarIcon>
+          {stars}
         </FlexContainer>
 
         <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>

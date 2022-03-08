@@ -64,16 +64,19 @@ function Settings(props) {
         </div>
 
         <Input
+        type="password"
           placeholder="Current password"
           {...register("current_password", { required: true })}
         ></Input>
 
         <Input
+        type="password"
           placeholder="New password"
           {...register("new_password", { required: true })}
         ></Input>
 
         <Input
+        type="password"
           placeholder="Repeat new password"
           {...register("repeat_new_password", { required: true })}
         ></Input>
