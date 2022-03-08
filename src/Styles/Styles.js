@@ -347,6 +347,7 @@ export const MapContainerStyled = styled(MapContainer)`
   height: 100%;
   z-index: 0;
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
 `;
