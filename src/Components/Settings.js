@@ -2,7 +2,7 @@ import React from "react";
 import {
   FlexContainer,
   LeftArrowIconStyle,
-  FormStyle,
+  FormStyled,
   colors,
   Input,
   Button,
@@ -50,7 +50,7 @@ function Settings(props) {
         <Button value="Report an error" style={{ marginTop: 0 }}></Button>
       </FlexContainer>
 
-      <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
+      <FormStyled onSubmit={handleSubmit(onSubmit)}>
         {/* Title Client Registration*/}
         <div
           style={{
@@ -64,25 +64,25 @@ function Settings(props) {
         </div>
 
         <Input
-        type="password"
+          type="password"
           placeholder="Current password"
           {...register("current_password", { required: true })}
         ></Input>
 
         <Input
-        type="password"
+          type="password"
           placeholder="New password"
           {...register("new_password", { required: true })}
         ></Input>
 
         <Input
-        type="password"
+          type="password"
           placeholder="Repeat new password"
           {...register("repeat_new_password", { required: true })}
         ></Input>
 
         <Button type="submit" value="Confirm"></Button>
-      </form>
+      </FormStyled>
 
       <Button
         value="Logout"

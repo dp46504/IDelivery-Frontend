@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
 }
 html,body{
     width:100%;
+    min-height:100vh;
     height:100%;
     
     font-family: 'Montserrat', sans-serif;
@@ -29,18 +30,22 @@ html,body{
 
 body{
     padding-top: ${globalPadding};
+  overflow-y: scroll;
+
 }
 #root{
-    width:100%;
-    height:100%;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+
+  margin: 0 auto;
 }
 `;
 
 export const FlexContainer = styled.div`
   width: 100%;
-  height: ${(props) => {
-    return props.height;
-  }};
+  min-height: fit-content;
+  height: ${(props) => (props.height ? props.height : "100%")};
 
   display: flex;
   flex-direction: ${(props) => {
@@ -55,18 +60,7 @@ export const FlexContainer = styled.div`
 
   margin: 0 auto;
 `;
-export const BodyContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  margin: 0 auto;
-`;
 export const Title = styled.div`
   font-weight: bold;
   font-size: ${(props) => {
@@ -88,13 +82,13 @@ export const ListItem = styled.div`
     return props.background ? props.background : colors.lightBlue;
   }};
   font-weight: 500;
-  margin-top: 1rem;
+  margin: 0.8rem auto;
   padding: 0.8rem;
   border-radius: 0.6rem;
 `;
 
 export const MenuContainer = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -108,6 +102,7 @@ export const MenuContainer = styled.div`
 
 export const MenuItem = styled(NavLink)`
   text-decoration: none;
+  text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -135,7 +130,7 @@ export const GearIconStyle = {
   height: "2rem",
 
   cursor: "pointer",
-  position: "absolute",
+  position: "fixed",
   top: globalPadding,
   right: globalPadding,
 };
@@ -145,7 +140,7 @@ export const LeftArrowIconStyle = {
   height: "2rem",
 
   cursor: "pointer",
-  position: "absolute",
+  position: "fixed",
   top: globalPadding,
   left: globalPadding,
 };
@@ -160,7 +155,7 @@ export const UndrawIconStyle = {
   width: "90%",
   minWidth: "100",
   maxWidth: "500",
-  aspectRatio: "1:1",
+  aspectRatio: "1",
 };
 
 const rotate = keyframes`
@@ -177,13 +172,14 @@ export const RefreshIconStyle = styled(RefreshIcon)`
   animation: ${anim};
 `;
 
-export const FormStyle = {
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
+export const FormStyled = styled.form`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Input = styled.input`
   width: 95%;

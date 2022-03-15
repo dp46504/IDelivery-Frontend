@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import {
   FlexContainer,
   UndrawIconStyle,
-  FormStyle,
   Input,
   Button,
   colors,
   LeftArrowIconStyle,
+  FormStyled,
 } from "../Styles/Styles";
 import { ReactComponent as AddPackageIcon } from "../Icons/adding-package-icon.svg";
 import { ReactComponent as LeftArrowIcon } from "../Icons/left-arrow-icon.svg";
@@ -30,7 +30,7 @@ function ClientAddPackage(props) {
   };
 
   return (
-    <FlexContainer orientation="v" height="100%">
+    <>
       {/* Left arrow (Go Back) */}
       <LeftArrowIcon
         onClick={() => {
@@ -40,22 +40,65 @@ function ClientAddPackage(props) {
       ></LeftArrowIcon>
 
       {/* Title Client Registration*/}
-      <div
-        style={{
-          color: colors.darkBlue,
-          fontSize: "1.5rem",
-          fontWeight: "bold",
-          textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
-        }}
-      >
-        Adding package
-      </div>
-      <AddPackageIcon
-        className="icon"
-        style={(UndrawIconStyle, { marginTop: "2rem" })}
-      ></AddPackageIcon>
+      <FlexContainer orientation="v" height="30%">
+        <div
+          style={{
+            color: colors.darkBlue,
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+          }}
+        >
+          Adding package
+        </div>
+        <AddPackageIcon
+          className="icon"
+          style={(UndrawIconStyle, { marginTop: "2rem" })}
+        ></AddPackageIcon>
+      </FlexContainer>
 
-      <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
+      <FormStyled onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          placeholder="Address from"
+          {...register("address_from", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Address to"
+          {...register("address_to", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Cost (proposition)"
+          {...register("cost", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Weight"
+          {...register("weight", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Priority"
+          {...register("priority", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Address from"
+          {...register("address_from", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Address to"
+          {...register("address_to", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Cost (proposition)"
+          {...register("cost", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Weight"
+          {...register("weight", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Priority"
+          {...register("priority", { required: true })}
+        ></Input>
+
         <Input
           placeholder="Address from"
           {...register("address_from", { required: true })}
@@ -84,8 +127,8 @@ function ClientAddPackage(props) {
           {...register("remarks", { required: true })}
         ></Input>
         <Button type="submit" value="Add"></Button>
-      </form>
-    </FlexContainer>
+      </FormStyled>
+    </>
   );
 }
 

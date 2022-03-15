@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import {
   FlexContainer,
   UndrawIconStyle,
-  FormStyle,
+  FormStyled,
   Input,
   Button,
   colors,
@@ -43,7 +43,7 @@ function CourierRegistration(props) {
 
   return (
     <>
-      <FlexContainer orientation="v" height="100%">
+      <FlexContainer orientation="v" height="30%">
         {/* Title Courier Registration*/}
         <div
           style={{
@@ -59,40 +59,40 @@ function CourierRegistration(props) {
           className="icon"
           style={(UndrawIconStyle, { marginTop: "2rem" })}
         ></CourierRegIcon>
-
-        <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            placeholder="Name"
-            {...register("name", { required: true })}
-          ></Input>
-          <Input
-            placeholder="Lastname"
-            {...register("lastname", { required: true })}
-          ></Input>
-          <Input
-            placeholder="E-mail"
-            {...register("email", { required: true })}
-          ></Input>
-          <Input
-            type="password"
-            placeholder="Password"
-            {...register("password", { required: true })}
-          ></Input>
-          <Input
-            type="password"
-            placeholder="Confirm Password"
-            {...register("confirmPasword", { required: true })}
-          ></Input>
-          <InputPhoto>
-            <input
-              type="file"
-              placeholder="Scan of personal document"
-              {...register("personalDocument")}
-            ></input>
-          </InputPhoto>
-          <Button type="submit" value="Submit"></Button>
-        </form>
       </FlexContainer>
+
+      <FormStyled onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          placeholder="Name"
+          {...register("name", { required: true })}
+        ></Input>
+        <Input
+          placeholder="Lastname"
+          {...register("lastname", { required: true })}
+        ></Input>
+        <Input
+          placeholder="E-mail"
+          {...register("email", { required: true })}
+        ></Input>
+        <Input
+          type="password"
+          placeholder="Password"
+          {...register("password", { required: true })}
+        ></Input>
+        <Input
+          type="password"
+          placeholder="Confirm Password"
+          {...register("confirmPasword", { required: true })}
+        ></Input>
+        <InputPhoto>
+          <input
+            type="file"
+            placeholder="Scan of personal document"
+            {...register("personalDocument")}
+          ></input>
+        </InputPhoto>
+        <Button type="submit" value="Submit"></Button>
+      </FormStyled>
     </>
   );
 }

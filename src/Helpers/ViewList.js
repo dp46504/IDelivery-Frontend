@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FlexContainer } from "../Styles/Styles";
 
 export default function ViewList(props) {
   return (
-    <>
+    <FlexContainer orientation="v" height="100%">
       <Link to="/courier_registration">COURIER REGISTRATION</Link>
       <Link to="/courier_homepage">COURIER HOMEPAGE</Link>
 
@@ -16,6 +17,6 @@ export default function ViewList(props) {
       <Link to="/settings">SETTINGS</Link>
       <Link to="/rate_courier">RATE COURIER</Link>
       <Link to="/">THIS PAGE</Link>
-    </>
+    </FlexContainer>
   );
 }

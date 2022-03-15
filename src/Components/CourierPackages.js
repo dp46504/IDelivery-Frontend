@@ -6,7 +6,7 @@ import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
 import { useNavigate } from "react-router-dom";
 
 const Courierpackages = () => {
-  const [isPackages, setIsPackages] = useState(false);
+  const [isPackages, setIsPackages] = useState(true);
   let history = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("account-type") !== "courier") {
@@ -17,36 +17,49 @@ const Courierpackages = () => {
     <>
       <MenuComponents></MenuComponents>
       {/* List of packages nearby */}
-      <FlexContainer orientation="v" height="100%">
-        {isPackages === true ? (
-          <>
-            <ListItemComponent
-              address="Szkolna 17"
-              weight="4.5"
-              distance="0.9"
-              background={colors.lightBlue}
-            ></ListItemComponent>
-            <ListItemComponent
-              address="Szkolna 18"
-              weight="3.2"
-              distance="0.5"
-              background={colors.lightYellow}
-            ></ListItemComponent>
-            <ListItemComponent
-              address="Szkolna 19"
-              weight="4.4"
-              distance="0.9"
-              background={colors.lightBlue}
-            ></ListItemComponent>
-            <ListItemComponent
-              address="Szkolna 20"
-              weight="3.5"
-              distance="1"
-              background={colors.lightBlue}
-            ></ListItemComponent>
-          </>
-        ) : (
-          <>
+
+      {isPackages === true ? (
+        <>
+          <FlexContainer orientation="v" height="5%">
+            <div
+              style={{
+                color: colors.darkBlue,
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+              }}
+            >
+              Packages
+            </div>
+          </FlexContainer>
+          <ListItemComponent
+            address="Szkolna 17"
+            weight="4.5"
+            distance="0.9"
+            background={colors.lightBlue}
+          ></ListItemComponent>
+          <ListItemComponent
+            address="Szkolna 18"
+            weight="3.2"
+            distance="0.5"
+            background={colors.lightYellow}
+          ></ListItemComponent>
+          <ListItemComponent
+            address="Szkolna 19"
+            weight="4.4"
+            distance="0.9"
+            background={colors.lightBlue}
+          ></ListItemComponent>
+          <ListItemComponent
+            address="Szkolna 20"
+            weight="3.5"
+            distance="1"
+            background={colors.lightBlue}
+          ></ListItemComponent>
+        </>
+      ) : (
+        <>
+          <FlexContainer orientation="v" height="100%">
             <MainLogo className="icon"></MainLogo>
             <div
               style={{
@@ -62,9 +75,9 @@ const Courierpackages = () => {
               Come back later.
             </div>
             <RefreshIconStyle></RefreshIconStyle>
-          </>
-        )}
-      </FlexContainer>
+          </FlexContainer>
+        </>
+      )}
     </>
   );
 };

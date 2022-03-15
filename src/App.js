@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <BodyContainer orientation="v">
+    <>
       <GlobalStyles></GlobalStyles>
 
       <Router>
@@ -65,7 +65,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </Router>
-    </BodyContainer>
+    </>
   );
 }
 
