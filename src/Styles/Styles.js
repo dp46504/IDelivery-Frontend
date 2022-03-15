@@ -274,7 +274,7 @@ export const InputPhoto = styled.div`
 `;
 
 export const Button = styled.input`
-  width: fit-content;
+  width: 50%;
   height: fit-content;
   justify-self: flex-end;
 
@@ -289,7 +289,7 @@ export const Button = styled.input`
   font-weight: bold;
 
   padding: 1rem 1.5rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
 

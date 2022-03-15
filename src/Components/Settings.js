@@ -29,7 +29,7 @@ function Settings(props) {
   };
 
   return (
-    <FlexContainer orientation="v" height="100%">
+    <>
       {/* Left arrow (Go Back) */}
       <LeftArrowIcon
         onClick={() => {
@@ -38,19 +38,20 @@ function Settings(props) {
         style={LeftArrowIconStyle}
       ></LeftArrowIcon>
 
-      <FlexContainer
-        orientation="v"
-        height="45%"
-        style={{ justifyContent: "center" }}
-      >
-        <Button
-          value="Change account details"
-          style={{ marginTop: 0 }}
-        ></Button>
-        <Button value="Report an error" style={{ marginTop: 0 }}></Button>
+      <FlexContainer orientation="v" height="5%">
+        <div
+          style={{
+            color: colors.darkBlue,
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+          }}
+        >
+          Settings
+        </div>
       </FlexContainer>
 
-      <FormStyled onSubmit={handleSubmit(onSubmit)}>
+      <FormStyled onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "5%" }}>
         {/* Title Client Registration*/}
         <div
           style={{
@@ -84,13 +85,31 @@ function Settings(props) {
         <Button type="submit" value="Confirm"></Button>
       </FormStyled>
 
-      <Button
-        value="Logout"
-        onClick={() => {
-          logout();
-        }}
-      ></Button>
-    </FlexContainer>
+      <FlexContainer
+        orientation="v"
+        height="30%"
+        style={{ justifyContent: "center" }}
+      >
+        <Button
+          value="Change account details"
+          style={{ marginTop: 0 }}
+        ></Button>
+        <Button value="Report an error" style={{ marginTop: 0 }}></Button>
+      </FlexContainer>
+
+      <FlexContainer
+        orientation="v"
+        height="10%"
+        style={{ position: "fixed", bottom: 0 }}
+      >
+        <Button
+          value="Logout"
+          onClick={() => {
+            logout();
+          }}
+        ></Button>
+      </FlexContainer>
+    </>
   );
 }
 
