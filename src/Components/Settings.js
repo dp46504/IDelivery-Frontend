@@ -97,11 +97,7 @@ function Settings(props) {
         <Button value="Report an error" style={{ marginTop: 0 }}></Button>
       </FlexContainer>
 
-      <FlexContainer
-        orientation="v"
-        height="10%"
-        style={{ position: "fixed", bottom: 0 }}
-      >
+      <FlexContainer orientation="v" height="10%">
         <Button
           value="Logout"
           onClick={() => {
