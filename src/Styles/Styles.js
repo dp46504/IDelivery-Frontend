@@ -1,18 +1,18 @@
-import styled, { createGlobalStyle, keyframes, css } from "styled-components";
-import { NavLink } from "react-router-dom";
-import { MapContainer } from "react-leaflet";
-import { ReactComponent as RefreshIcon } from "../Icons/refresh-icon.svg";
+import styled, { createGlobalStyle, keyframes, css } from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { MapContainer } from 'react-leaflet'
+import { ReactComponent as RefreshIcon } from '../Icons/refresh-icon.svg'
 
 export const colors = {
-  darkBlue: "#31A2C6",
-  lightBlue: "#ADDCEB",
-  lighterBlue: "#DBECF1",
-  lightYellow: "#FFD56A",
-  darkYellow: "#DEAE33",
-  shadow1: "rgba(0,0,0,0.1)",
-};
+  darkBlue: '#31A2C6',
+  lightBlue: '#ADDCEB',
+  lighterBlue: '#DBECF1',
+  lightYellow: '#FFD56A',
+  darkYellow: '#DEAE33',
+  shadow1: 'rgba(0,0,0,0.1)',
+}
 
-const globalPadding = "1rem";
+const globalPadding = '1rem'
 
 export const GlobalStyles = createGlobalStyle`
 *{
@@ -40,37 +40,37 @@ body{
 
   margin: 0 auto;
 }
-`;
+`
 
 export const FlexContainer = styled.div`
   width: 100%;
   min-height: fit-content;
-  height: ${(props) => (props.height ? props.height : "100%")};
+  height: ${(props) => (props.height ? props.height : '100%')};
 
   display: flex;
   flex-direction: ${(props) => {
-    return props.orientation === "h" ? "row" : "column";
+    return props.orientation === 'h' ? 'row' : 'column'
   }};
   justify-content: ${(props) => {
-    return props.justifyContent ? props.justifyContent : "center";
+    return props.justifyContent ? props.justifyContent : 'center'
   }};
   align-items: ${(props) => {
-    return props.alignItems ? props.alignItems : "center";
+    return props.alignItems ? props.alignItems : 'center'
   }};
 
   margin: 0 auto;
-`;
+`
 
 export const Title = styled.div`
   font-weight: bold;
   font-size: ${(props) => {
-    return props.fontSize ? props.fontSize : "1.5rem";
+    return props.fontSize ? props.fontSize : '1.5rem'
   }};
   color: ${(props) => {
-    return props.color ? props.color : colors.darkBlue;
+    return props.color ? props.color : colors.darkBlue
   }};
   text-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.25);
-`;
+`
 
 export const ListItem = styled.div`
   width: 95%;
@@ -79,13 +79,13 @@ export const ListItem = styled.div`
   place-items: center;
 
   background-color: ${(props) => {
-    return props.background ? props.background : colors.lightBlue;
+    return props.background ? props.background : colors.lightBlue
   }};
   font-weight: 500;
   margin: 0.8rem auto;
   padding: 0.8rem;
   border-radius: 0.6rem;
-`;
+`
 
 export const MenuContainer = styled.div`
   position: fixed;
@@ -98,7 +98,7 @@ export const MenuContainer = styled.div`
   width: 100%;
   height: 4rem;
   z-index: 100;
-`;
+`
 
 export const MenuItem = styled(NavLink)`
   text-decoration: none;
@@ -123,54 +123,54 @@ export const MenuItem = styled(NavLink)`
       fill: white;
     }
   }
-`;
+`
 
 export const GearIconStyle = {
-  width: "2rem",
-  height: "2rem",
+  width: '2rem',
+  height: '2rem',
 
-  cursor: "pointer",
-  position: "fixed",
+  cursor: 'pointer',
+  position: 'fixed',
   top: globalPadding,
   right: globalPadding,
-};
+}
 
 export const LeftArrowIconStyle = {
-  width: "2rem",
-  height: "2rem",
+  width: '2rem',
+  height: '2rem',
 
-  cursor: "pointer",
-  position: "fixed",
+  cursor: 'pointer',
+  position: 'fixed',
   top: globalPadding,
   left: globalPadding,
-};
+}
 
 export const IconStyle = {
-  marginRight: "0.3rem",
-  width: "36",
-  height: "36",
-};
+  marginRight: '0.3rem',
+  width: '36',
+  height: '36',
+}
 
 export const UndrawIconStyle = {
-  width: "90%",
-  minWidth: "100",
-  maxWidth: "500",
-  aspectRatio: "1",
-};
+  width: '90%',
+  minWidth: '100',
+  maxWidth: '500',
+  aspectRatio: '1',
+}
 
 const rotate = keyframes`
   from {transform: rotate(0deg) scaleY(0.97)};
   to {transform: rotate(-360deg) scaleY(0.97)};
-`;
+`
 
 const anim = css`
   ${rotate} 2s infinite both linear;
-`;
+`
 
 export const RefreshIconStyle = styled(RefreshIcon)`
   margin-top: 1.5rem;
   animation: ${anim};
-`;
+`
 
 export const FormStyled = styled.form`
   width: 100%;
@@ -179,7 +179,7 @@ export const FormStyled = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+`
 
 export const Input = styled.input`
   width: 95%;
@@ -192,7 +192,7 @@ export const Input = styled.input`
 
   text-align: center;
   color: #000;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 
   padding: 1rem;
@@ -219,7 +219,7 @@ export const Input = styled.input`
   &:focus {
     transform: scale(1.05);
   }
-`;
+`
 
 export const InputPhoto = styled.div`
   width: 95%;
@@ -244,8 +244,8 @@ export const InputPhoto = styled.div`
 
   transition: all 200ms ease-in-out;
 
-  & input[type="file"] {
-    font-family: "Montserrat", sans-serif;
+  & input[type='file'] {
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     width: fit-content;
     height: fit-content;
@@ -253,25 +253,25 @@ export const InputPhoto = styled.div`
     max-width: fit-content;
   }
 
-  & input[type="file"]::-webkit-file-upload-button {
+  & input[type='file']::-webkit-file-upload-button {
     display: none;
   }
 
-  & input[type="file"]::placeholder {
+  & input[type='file']::placeholder {
     background-color: ${colors.lightBlue};
     color: ${colors.darkBlue};
   }
 
-  & input[type="file"]:-webkit-autofill {
+  & input[type='file']:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /* Change the color to your own background color */
     -webkit-text-fill-color: #000;
   }
 
-  & input[type="file"]:-webkit-autofill:focus {
+  & input[type='file']:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 10rem ${colors.lightBlue} inset; /*your box-shadow*/
     -webkit-text-fill-color: #000;
   }
-`;
+`
 
 export const Button = styled.input`
   width: 50%;
@@ -285,7 +285,7 @@ export const Button = styled.input`
 
   text-align: center;
   color: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 
   padding: 1rem 1.5rem;
@@ -300,7 +300,7 @@ export const Button = styled.input`
   &:hover {
     transform: scale(1.05);
   }
-`;
+`
 
 export const SearchBar = styled.input`
   position: absolute;
@@ -318,25 +318,25 @@ export const SearchBar = styled.input`
   color: ${colors.darkBlue};
   letter-spacing: 0.05rem;
   z-index: 100;
-`;
+`
 
 export const SearchIconStyle = {
-  width: "2rem",
-  height: "2rem",
-  position: "absolute",
+  width: '2rem',
+  height: '2rem',
+  position: 'absolute',
   top: `calc(0.2rem + ${globalPadding})`,
   left: `calc(0.5rem + ${globalPadding})`,
   zIndex: 100,
-};
+}
 
 export const XIconStyle = {
-  width: "1.5rem",
-  height: "1.5rem",
-  position: "absolute",
+  width: '1.5rem',
+  height: '1.5rem',
+  position: 'absolute',
   top: `calc(0.3rem + ${globalPadding})`,
   right: `calc(0.5rem + ${globalPadding})`,
   zIndex: 100,
-};
+}
 
 export const MapContainerStyled = styled(MapContainer)`
   width: 100%;
@@ -346,4 +346,9 @@ export const MapContainerStyled = styled(MapContainer)`
   overflow: hidden;
   top: 0;
   left: 0;
-`;
+`
+
+export const LabelStyled = styled.label`
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+`
