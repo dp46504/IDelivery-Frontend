@@ -4,21 +4,60 @@ import { FlexContainer, colors, RefreshIconStyle } from "../Styles/Styles";
 import MenuComponents from "./MenuComponents";
 import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
 import { useNavigate } from "react-router-dom";
+import variables from "../Variables";
 
 const Courierpackages = () => {
-  const [isPackages, setIsPackages] = useState(true);
+  const [packages, setPackages] = useState([]);
   let history = useNavigate();
   useEffect(() => {
+    const getPackagesInfo = async () => {
+      let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      };
+
+      fetch(`${variables.endpoint}/api/user/packages`, options)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data === null) {
+            return alert("Something went wrong");
+          }
+
+          const comp = (item) => {
+            return item.status === "awaiting";
+          };
+
+          let packageList = data.filter(comp);
+
+          setPackages(packageList);
+        });
+    };
+
     if (localStorage.getItem("account-type") !== "courier") {
       history("/login");
     }
+    getPackagesInfo();
   }, []);
   return (
     <>
       <MenuComponents></MenuComponents>
       {/* List of packages nearby */}
 
-      {isPackages === true ? (
+      {packages.length !== 0 ? (
         <>
           <FlexContainer orientation="v" height="5%">
             <div
@@ -32,30 +71,17 @@ const Courierpackages = () => {
               Packages
             </div>
           </FlexContainer>
-          <ListItemComponent
-            address="Szkolna 17"
-            weight="4.5"
-            distance="0.9"
-            background={colors.lightBlue}
-          ></ListItemComponent>
-          <ListItemComponent
-            address="Szkolna 18"
-            weight="3.2"
-            distance="0.5"
-            background={colors.lightYellow}
-          ></ListItemComponent>
-          <ListItemComponent
-            address="Szkolna 19"
-            weight="4.4"
-            distance="0.9"
-            background={colors.lightBlue}
-          ></ListItemComponent>
-          <ListItemComponent
-            address="Szkolna 20"
-            weight="3.5"
-            distance="1"
-            background={colors.lightBlue}
-          ></ListItemComponent>
+          {packages.map((packageInfo) => {
+            return (
+              <ListItemComponent
+                key={packageInfo.package.uuid}
+                background={colors.lightBlue}
+                address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
+                weight={`${packageInfo.package.weight}kg`}
+                distance={`${packageInfo.package.distance}km`}
+              ></ListItemComponent>
+            );
+          })}
         </>
       ) : (
         <>

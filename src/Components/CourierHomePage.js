@@ -122,7 +122,7 @@ function CourierHomePage(props) {
             background={colors.lightYellow}
             address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
             weight={`${packageInfo.package.weight}kg`}
-            distance="0.9km"
+            distance={`${packageInfo.package.distance}km`}
           ></ListItemComponent>
         );
       })}
@@ -158,7 +158,7 @@ function CourierHomePage(props) {
             background={colors.lightBlue}
             address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
             weight={`${packageInfo.package.weight}kg`}
-            distance="0.9km"
+            distance={`${packageInfo.package.distance}km`}
           ></ListItemComponent>
         );
       })}
