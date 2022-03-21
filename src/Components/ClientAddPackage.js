@@ -25,9 +25,15 @@ function ClientAddPackage(props) {
     }
   }, []);
   const onSubmit = (data) => {
+    let token = localStorage.getItem("access-token");
+    if (token === null) {
+      return false;
+    }
+
     const options = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       // address from -> data.countryF
       // address to -> data.countryT
@@ -47,23 +53,22 @@ function ClientAddPackage(props) {
           flatNumber: data.flatnumberT,
           postCode: data.postcodeT,
         },
-        cost: data.cost,
-        weight: data.weight,
-        priority: data.priority,
-        remarks: data.remarks,
+        price: parseFloat(data.cost),
+        weight: parseFloat(data.weight),
+        description: data.remarks,
+        distance: 1,
+        accessCode: "jebanie",
       }),
     };
-    fetch(`${variables.endpoint}/api/user/client-register`, options).then(
+    fetch(`${variables.endpoint}/api/user/client-errands`, options).then(
       (result) => {
         if (result.status === 200) {
-          alert("Client registered");
+          alert("Package Added");
         } else {
           alert("Something went wrong");
         }
       }
     );
-
-    // TODO Send to back-end :^)
   };
 
   return (
@@ -148,10 +153,6 @@ function ClientAddPackage(props) {
         <Input
           placeholder="Weight"
           {...register("weight", { required: true })}
-        ></Input>
-        <Input
-          placeholder="Priority"
-          {...register("priority", { required: true })}
         ></Input>
         <Input
           placeholder="Remarks"
