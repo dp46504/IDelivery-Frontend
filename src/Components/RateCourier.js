@@ -1,11 +1,11 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   FlexContainer,
   colors,
   LeftArrowIconStyle,
   Button,
   Input,
-  FormStyle,
+  FormStyled,
 } from "../Styles/Styles";
 import { ReactComponent as LeftArrowIcon } from "../Icons/left-arrow-icon.svg";
 import { ReactComponent as PersonIcon } from "../Icons/person-icon.svg";
@@ -23,84 +23,92 @@ function RateCourier(props) {
 
     // TODO Send to back-end :^)
   };
-  const [rate, setRate] = useState(5)
-  const [stars,setStars] = useState([
+  const [rate, setRate] = useState(5);
+  const [stars, setStars] = useState([
     <FullStarIcon
-          onClick={()=>{
-            setRate(1)
-          }}
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>,<FullStarIcon
-          onClick={()=>{
-            setRate(2)
-          }}
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>,<FullStarIcon
-          onClick={()=>{
-            setRate(3)
-          }}
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>,<FullStarIcon
-          onClick={()=>{
-            setRate(4)
-          }}
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>,<FullStarIcon
-          onClick={()=>{
-            setRate(5)
-          }}
-            style={{
-              width: 50,
-              height: 50,
-              margin: "0.2rem",
-            }}
-          ></FullStarIcon>
-  ])
+      onClick={() => {
+        setRate(1);
+      }}
+      style={{
+        width: 50,
+        height: 50,
+        margin: "0.2rem",
+      }}
+    ></FullStarIcon>,
+    <FullStarIcon
+      onClick={() => {
+        setRate(2);
+      }}
+      style={{
+        width: 50,
+        height: 50,
+        margin: "0.2rem",
+      }}
+    ></FullStarIcon>,
+    <FullStarIcon
+      onClick={() => {
+        setRate(3);
+      }}
+      style={{
+        width: 50,
+        height: 50,
+        margin: "0.2rem",
+      }}
+    ></FullStarIcon>,
+    <FullStarIcon
+      onClick={() => {
+        setRate(4);
+      }}
+      style={{
+        width: 50,
+        height: 50,
+        margin: "0.2rem",
+      }}
+    ></FullStarIcon>,
+    <FullStarIcon
+      onClick={() => {
+        setRate(5);
+      }}
+      style={{
+        width: 50,
+        height: 50,
+        margin: "0.2rem",
+      }}
+    ></FullStarIcon>,
+  ]);
 
   useEffect(() => {
-    let children = []
-    for(let i=1;i<=rate;i++){
-      children.push(<FullStarIcon
-        onClick={()=>{
-          setRate(i)
-        }}
+    let children = [];
+    for (let i = 1; i <= rate; i++) {
+      children.push(
+        <FullStarIcon
+          onClick={() => {
+            setRate(i);
+          }}
           style={{
             width: 50,
             height: 50,
             margin: "0.2rem",
           }}
-        ></FullStarIcon>)
+        ></FullStarIcon>
+      );
     }
-    for(let i=rate+1;i<=5;i++){
-      children.push(<EmptyStarIcon
-        onClick={()=>{
-          setRate(i)
-        }}
+    for (let i = rate + 1; i <= 5; i++) {
+      children.push(
+        <EmptyStarIcon
+          onClick={() => {
+            setRate(i);
+          }}
           style={{
             width: 50,
             height: 50,
             margin: "0.2rem",
           }}
-        ></EmptyStarIcon>)
-    } 
-    setStars(children)
-  },[rate])
+        ></EmptyStarIcon>
+      );
+    }
+    setStars(children);
+  }, [rate]);
 
   return (
     <>
@@ -150,10 +158,10 @@ function RateCourier(props) {
           {stars}
         </FlexContainer>
 
-        <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
+        <FormStyled onSubmit={handleSubmit(onSubmit)}>
           <Input placeholder="Remarks" style={{ height: "8rem" }}></Input>
           <Button type="submit" value="Submit"></Button>
-        </form>
+        </FormStyled>
       </FlexContainer>
     </>
   );

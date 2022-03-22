@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import {
   FlexContainer,
   UndrawIconStyle,
-  FormStyle,
+  FormStyled,
   Input,
   Button,
   colors,
@@ -64,7 +64,7 @@ function Login(props) {
         >
           Please, log in
         </div>
-        <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
+        <FormStyled onSubmit={handleSubmit(onSubmit)}>
           <Input
             placeholder="Email"
             {...register("email", { required: true })}
@@ -75,7 +75,7 @@ function Login(props) {
             {...register("password", { required: true })}
           ></Input>
           <Button type="submit" value="Log in"></Button>
-        </form>
+        </FormStyled>
       </FlexContainer>
     </>
   );

@@ -61,50 +61,51 @@ function ClientHomePage(props) {
       <MenuComponents></MenuComponents>
 
       {/* Title Welcome user Text */}
-      <div
-        style={{
-          color: colors.darkBlue,
-          fontSize: "1.5rem",
-          fontWeight: "bold",
-          textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
-        }}
-      >
-        {`Hello ${localStorage.getItem("user-name")}`}
-      </div>
-
-      {/* errands container */}
-      <FlexContainer orientation="v" height="100%">
-        {/* errands */}
+      <FlexContainer orientation="v" height="5%">
         <div
           style={{
-            color:
-              packages.length === 0 ? colors.lightYellow : colors.lightBlue,
-            fontSize: "2.05rem",
+            color: colors.darkBlue,
+            fontSize: "1.5rem",
             fontWeight: "bold",
-            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.1)",
-            marginTop: "1rem",
+            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
           }}
         >
-          {packages.length === 0 ? "No active packages" : "Errands"}
+          {`Hello ${localStorage.getItem("user-name")}!`}
         </div>
-
-        {/* errands List */}
-        {packages.map((packageInfo) => {
-          let background =
-            packageInfo.status === "active"
-              ? colors.lightYellow
-              : colors.lightBlue;
-
-          return (
-            <ListItemComponent
-              background={background}
-              address={`${packageInfo.package.addressFrom.street} ${packageInfo.package.addressFrom.flatNumber}`}
-              weight={`${packageInfo.package.weight}kg`}
-              distance="0.9km"
-            ></ListItemComponent>
-          );
-        })}
       </FlexContainer>
+
+      {/* errands container */}
+      {/* errands */}
+      <div
+        style={{
+          color: packages.length === 0 ? colors.lightYellow : colors.lightBlue,
+          fontSize: "2.05rem",
+          fontWeight: "bold",
+          textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.1)",
+          marginTop: "1rem",
+          textAlign: "center",
+        }}
+      >
+        {packages.length === 0 ? "No active packages" : "Errands"}
+      </div>
+
+      {/* errands List */}
+      {packages.map((packageInfo) => {
+        let background =
+          packageInfo.status === "active"
+            ? colors.lightYellow
+            : colors.lightBlue;
+
+        return (
+          <ListItemComponent
+            key={packageInfo.package.uuid}
+            background={background}
+            address={`${packageInfo.package.addressFrom.street} ${packageInfo.package.addressFrom.flatNumber}`}
+            weight={`${packageInfo.package.weight}kg`}
+            distance="0.9km"
+          ></ListItemComponent>
+        );
+      })}
     </>
   );
 }

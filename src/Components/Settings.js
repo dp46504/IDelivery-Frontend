@@ -2,7 +2,7 @@ import React from "react";
 import {
   FlexContainer,
   LeftArrowIconStyle,
-  FormStyle,
+  FormStyled,
   colors,
   Input,
   Button,
@@ -29,7 +29,7 @@ function Settings(props) {
   };
 
   return (
-    <FlexContainer orientation="v" height="100%">
+    <>
       {/* Left arrow (Go Back) */}
       <LeftArrowIcon
         onClick={() => {
@@ -38,19 +38,20 @@ function Settings(props) {
         style={LeftArrowIconStyle}
       ></LeftArrowIcon>
 
-      <FlexContainer
-        orientation="v"
-        height="45%"
-        style={{ justifyContent: "center" }}
-      >
-        <Button
-          value="Change account details"
-          style={{ marginTop: 0 }}
-        ></Button>
-        <Button value="Report an error" style={{ marginTop: 0 }}></Button>
+      <FlexContainer orientation="v" height="5%">
+        <div
+          style={{
+            color: colors.darkBlue,
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.25)",
+          }}
+        >
+          Settings
+        </div>
       </FlexContainer>
 
-      <form style={FormStyle} onSubmit={handleSubmit(onSubmit)}>
+      <FormStyled onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "5%" }}>
         {/* Title Client Registration*/}
         <div
           style={{
@@ -64,33 +65,47 @@ function Settings(props) {
         </div>
 
         <Input
-        type="password"
+          type="password"
           placeholder="Current password"
           {...register("current_password", { required: true })}
         ></Input>
 
         <Input
-        type="password"
+          type="password"
           placeholder="New password"
           {...register("new_password", { required: true })}
         ></Input>
 
         <Input
-        type="password"
+          type="password"
           placeholder="Repeat new password"
           {...register("repeat_new_password", { required: true })}
         ></Input>
 
         <Button type="submit" value="Confirm"></Button>
-      </form>
+      </FormStyled>
 
-      <Button
-        value="Logout"
-        onClick={() => {
-          logout();
-        }}
-      ></Button>
-    </FlexContainer>
+      <FlexContainer
+        orientation="v"
+        height="30%"
+        style={{ justifyContent: "center" }}
+      >
+        <Button
+          value="Change account details"
+          style={{ marginTop: 0 }}
+        ></Button>
+        <Button value="Report an error" style={{ marginTop: 0 }}></Button>
+      </FlexContainer>
+
+      <FlexContainer orientation="v" height="10%">
+        <Button
+          value="Logout"
+          onClick={() => {
+            logout();
+          }}
+        ></Button>
+      </FlexContainer>
+    </>
   );
 }
 
