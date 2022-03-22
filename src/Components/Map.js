@@ -49,7 +49,7 @@ const setLocation=(map)=>{
         style={XIconStyle}></XIcon>
 
       <MapContainerStyled
-        zoom={20}
+        zoom={12}
         scrollWheelZoom={true}
         zoomControl={false}
         whenCreated={(map)=>{setLocation(map)}}
