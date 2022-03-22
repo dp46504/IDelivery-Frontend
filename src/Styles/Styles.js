@@ -352,3 +352,16 @@ export const LabelStyled = styled.label`
   font-size: 1.25rem;
   margin-top: 0.5rem;
 `
+
+export const DialogSlider = styled.div`
+  width: 100%;
+  height: 20%;
+  position: fixed;
+  bottom: -20%;
+  left: 0;
+  border-radius: 0.15rem 0.15rem 0 0;
+  box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  background-color:white;
+  transition: all 200ms;
+`

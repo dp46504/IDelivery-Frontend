@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { FlexContainer, GearIconStyle, colors } from "../Styles/Styles";
+import React, { useEffect, useState, useRef } from "react";
+import { FlexContainer, GearIconStyle, colors, DialogSlider, Button } from "../Styles/Styles";
 import { ReactComponent as GearIcon } from "../Icons/gear-icon.svg";
 import ListItemComponent from "./ListItemComponent";
 import MenuComponents from "./MenuComponents";
@@ -9,6 +9,41 @@ import variables from "../Variables";
 function CourierHomePage(props) {
   let history = useNavigate();
   const [packages, setPackages] = useState([]);
+  const [packageUuid, setPackageUuid] = useState('');
+
+  let sliderRef = useRef(null)
+
+  function slideUp(idPackage){
+    let slider = sliderRef.current
+    slider.style.bottom == '-20%' || !slider.style.bottom ? slider.style.bottom=0: slider.style.bottom = '-20%';
+    setPackageUuid(idPackage)
+  }
+
+  const update = async (packageUuid)=>{
+    let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PATCH",
+    };
+    if(packageUuid===''){
+      return null
+    }
+    fetch(`${variables.endpoint}/api/user/update-status/${packageUuid}`, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return alert('Package status updated')
+        } else {
+          return alert("Something went wrong");
+        }
+      })
+  };
 
   useEffect(() => {
     const getPackagesInfo = async () => {
@@ -118,11 +153,13 @@ function CourierHomePage(props) {
 
         return (
           <ListItemComponent
+            clickMethod={()=>{slideUp(packageInfo.package.uuid)}} 
             key={packageInfo.package.uuid}
             background={colors.lightYellow}
             address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
             weight={`${packageInfo.package.weight}kg`}
             distance={`${packageInfo.package.distance}km`}
+            status={packageInfo.status}
           ></ListItemComponent>
         );
       })}
@@ -162,6 +199,11 @@ function CourierHomePage(props) {
           ></ListItemComponent>
         );
       })}
+      <DialogSlider ref={sliderRef}>
+        <FlexContainer orientation="v" height="100%">
+        <Button onClick={()=>{update(packageUuid)}} type="button" value="Update status" />
+        </FlexContainer>
+      </DialogSlider>
     </>
   );
 }

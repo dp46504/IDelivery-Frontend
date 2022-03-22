@@ -37,7 +37,7 @@ function ClientHomePage(props) {
           if (data === null) {
             return alert("Something went wrong");
           }
-          console.log(data);
+          console.log(data);  
           setPackages(data);
         });
     };
@@ -92,9 +92,11 @@ function ClientHomePage(props) {
       {/* errands List */}
       {packages.map((packageInfo) => {
         let background =
-          packageInfo.status === "active"
+          packageInfo.status === ("reserved" || "ongoing" || "delivered")  
             ? colors.lightYellow
             : colors.lightBlue;
+
+
 
         return (
           <ListItemComponent

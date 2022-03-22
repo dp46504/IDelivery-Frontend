@@ -90,11 +90,11 @@ function Settings(props) {
         height="30%"
         style={{ justifyContent: "center" }}
       >
-        <Button
+        <Button type="button"
           value="Change account details"
           style={{ marginTop: 0 }}
         ></Button>
-        <Button value="Report an error" style={{ marginTop: 0 }}></Button>
+        <Button type="button" value="Report an error" style={{ marginTop: 0 }}></Button>
       </FlexContainer>
 
       <FlexContainer orientation="v" height="10%">

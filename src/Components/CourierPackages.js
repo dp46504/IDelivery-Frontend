@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ListItemComponent from "./ListItemComponent";
-import { FlexContainer, colors, RefreshIconStyle } from "../Styles/Styles";
+import { FlexContainer, colors, RefreshIconStyle, DialogSlider, Button } from "../Styles/Styles";
 import MenuComponents from "./MenuComponents";
 import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,43 @@ import variables from "../Variables";
 
 const Courierpackages = () => {
   const [packages, setPackages] = useState([]);
+  const [packageUuid, setPackageUuid] = useState('');
   let history = useNavigate();
+
+  let sliderRef = useRef(null)
+
+  function slideUp(idPackage){
+    let slider = sliderRef.current
+    slider.style.bottom == '-20%' || !slider.style.bottom ? slider.style.bottom=0: slider.style.bottom = '-20%';
+    setPackageUuid(idPackage)
+  }
+  const reserve = async (packageUuid)=>{
+    let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PATCH",
+    };
+    if(packageUuid===''){
+      return null
+    }
+    fetch(`${variables.endpoint}/api/user/update-status/${packageUuid}`, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return alert('Package reserved')
+        } else {
+          return alert("Something went wrong");
+        }
+      })
+  };
+  
+  
   useEffect(() => {
     const getPackagesInfo = async () => {
       let token = localStorage.getItem("access-token");
@@ -42,7 +78,7 @@ const Courierpackages = () => {
           };
 
           let packageList = data.filter(comp);
-
+          console.log(packageList )
           setPackages(packageList);
         });
     };
@@ -74,11 +110,13 @@ const Courierpackages = () => {
           {packages.map((packageInfo) => {
             return (
               <ListItemComponent
+                clickMethod={()=>{slideUp(packageInfo.package.uuid)}}
                 key={packageInfo.package.uuid}
                 background={colors.lightBlue}
                 address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
                 weight={`${packageInfo.package.weight}kg`}
                 distance={`${packageInfo.package.distance}km`}
+                
               ></ListItemComponent>
             );
           })}
@@ -104,6 +142,11 @@ const Courierpackages = () => {
           </FlexContainer>
         </>
       )}
+      <DialogSlider ref={sliderRef}>
+        <FlexContainer orientation="v" height="100%">
+        <Button onClick={()=>{reserve(packageUuid)}} type="button" value="Reserve" />
+        </FlexContainer>
+      </DialogSlider>
     </>
   );
 };
