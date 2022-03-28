@@ -208,6 +208,7 @@ function CourierHomePage(props) {
             address={`${packageInfo.package.addressTo.street} ${packageInfo.package.addressTo.flatNumber}`}
             weight={`${packageInfo.package.weight}kg`}
             distance={`${packageInfo.package.distance}m`}
+            status={packageInfo.status}
           ></ListItemComponent>
         );
       })}
