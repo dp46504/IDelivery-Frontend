@@ -15,7 +15,6 @@ function ClientHomePage(props) {
       let token = localStorage.getItem('access-token')
       if (token === null) {
         return false
-        // return false
       }
 
       const options = {

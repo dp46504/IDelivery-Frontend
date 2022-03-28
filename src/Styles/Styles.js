@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, keyframes, css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { MapContainer } from 'react-leaflet'
 import { ReactComponent as RefreshIcon } from '../Icons/refresh-icon.svg'
 
@@ -362,6 +362,11 @@ export const DialogSlider = styled.div`
   border-radius: 0.15rem 0.15rem 0 0;
   box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 2000;
-  background-color:white;
+  background-color: white;
   transition: all 200ms;
+`
+export const StyledLink = styled(Link)`
+  font-weight: 700;
+  color: ${colors.darkBlue};
+  text-decoration: underline;
 `
