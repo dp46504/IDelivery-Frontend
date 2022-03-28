@@ -6,6 +6,7 @@ import {
   RefreshIconStyle,
   DialogSlider,
   Button,
+  WhiteSpacer,
 } from "../Styles/Styles";
 import MenuComponents from "./MenuComponents";
 import { ReactComponent as MainLogo } from "../Icons/main-logo-icon.svg";
@@ -14,6 +15,7 @@ import variables from "../Variables";
 
 const Courierpackages = () => {
   const [packages, setPackages] = useState([]);
+  const [reload, setReload] = useState(0);
   const [packageUuid, setPackageUuid] = useState("");
   let history = useNavigate();
 
@@ -47,6 +49,7 @@ const Courierpackages = () => {
       options
     ).then((response) => {
       if (response.status === 200) {
+        slideUp(null);
         return alert("Package reserved");
       } else {
         return alert("Something went wrong");
@@ -93,10 +96,58 @@ const Courierpackages = () => {
     };
 
     if (localStorage.getItem("account-type") !== "courier") {
-      history("/login");
+      history("/");
     }
     getPackagesInfo();
+
+    setInterval(() => {
+      setReload((reload) => reload + 1);
+    }, 5000);
   }, []);
+
+  useEffect(() => {
+    const getPackagesInfo = async () => {
+      let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      };
+
+      fetch(`${variables.endpoint}/api/user/packages`, options)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data === null) {
+            return alert("Something went wrong");
+          }
+
+          const comp = (item) => {
+            return item.status === "awaiting";
+          };
+
+          let packageList = data.filter(comp);
+          console.log(packageList);
+          setPackages(packageList);
+        });
+    };
+
+    if (localStorage.getItem("account-type") !== "courier") {
+      history("/");
+    }
+    getPackagesInfo();
+  }, [reload]);
   return (
     <>
       <MenuComponents></MenuComponents>
@@ -152,6 +203,7 @@ const Courierpackages = () => {
           </FlexContainer>
         </>
       )}
+      <WhiteSpacer></WhiteSpacer>
       <DialogSlider ref={sliderRef}>
         <FlexContainer orientation="v" height="100%">
           <Button

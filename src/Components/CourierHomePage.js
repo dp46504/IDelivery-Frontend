@@ -5,6 +5,7 @@ import {
   colors,
   DialogSlider,
   Button,
+  WhiteSpacer,
 } from "../Styles/Styles";
 import { ReactComponent as GearIcon } from "../Icons/gear-icon.svg";
 import ListItemComponent from "./ListItemComponent";
@@ -15,6 +16,7 @@ import variables from "../Variables";
 function CourierHomePage(props) {
   let history = useNavigate();
   const [packages, setPackages] = useState([]);
+  const [reload, setReload] = useState(0);
   const [packageUuid, setPackageUuid] = useState("");
 
   let sliderRef = useRef(null);
@@ -48,6 +50,8 @@ function CourierHomePage(props) {
       options
     ).then((response) => {
       if (response.status === 200) {
+        setReload(reload + 1);
+        slideUp(null);
         return alert("Package status updated");
       } else {
         return alert("Something went wrong");
@@ -97,7 +101,55 @@ function CourierHomePage(props) {
       history("/login");
     }
     getPackagesInfo();
+
+    setInterval(() => {
+      setReload((reload) => reload + 1);
+    }, 5000);
   }, []);
+
+  useEffect(() => {
+    const getPackagesInfo = async () => {
+      let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      };
+
+      fetch(`${variables.endpoint}/api/user/packages`, options)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data === null) {
+            return alert("Something went wrong");
+          }
+
+          const comp = (item) => {
+            return item.status !== "awaiting";
+          };
+
+          let packageList = data.filter(comp);
+
+          setPackages(packageList);
+        });
+    };
+
+    if (localStorage.getItem("account-type") !== "courier") {
+      history("/login");
+    }
+    getPackagesInfo();
+  }, [reload]);
 
   const reserved = (item) => {
     return (
@@ -142,18 +194,20 @@ function CourierHomePage(props) {
       {/* Active */}
       <div
         style={{
-          color: colors.lightYellow,
+          color:
+            packages.filter(reserved).length === 0
+              ? colors.lightYellow
+              : colors.lightBlue,
           fontSize: "2.05rem",
           fontWeight: "bold",
           textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.1)",
           textAlign: "center",
         }}
       >
-        Active errand
+        {packages.filter(reserved).length === 0
+          ? "No active packages"
+          : "Active errand"}
       </div>
-      {packages.filter(reserved).length === 0 ? (
-        <div>There is no active packages</div>
-      ) : null}
       {/* Active errands List */}
 
       {packages.map((packageInfo) => {
@@ -164,7 +218,9 @@ function CourierHomePage(props) {
         return (
           <ListItemComponent
             clickMethod={() => {
-              slideUp(packageInfo.package.uuid);
+              if (packageInfo.status !== "delivered") {
+                slideUp(packageInfo.package.uuid);
+              }
             }}
             key={packageInfo.package.uuid}
             background={colors.lightYellow}
@@ -212,6 +268,7 @@ function CourierHomePage(props) {
           ></ListItemComponent>
         );
       })}
+      <WhiteSpacer></WhiteSpacer>
       <DialogSlider ref={sliderRef}>
         <FlexContainer orientation="v" height="100%">
           <Button

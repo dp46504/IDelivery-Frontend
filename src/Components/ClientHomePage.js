@@ -5,6 +5,7 @@ import {
   colors,
   DialogSlider,
   Button,
+  WhiteSpacer,
 } from "../Styles/Styles";
 import { ReactComponent as GearIcon } from "../Icons/gear-icon.svg";
 import ListItemComponent from "./ListItemComponent";
@@ -14,6 +15,7 @@ import variables from "../Variables";
 
 function ClientHomePage(props) {
   const [packages, setPackages] = useState([]);
+  const [reload, setReload] = useState(0);
   const [packageUuid, setPackageUuid] = useState("");
 
   let sliderRef = useRef(null);
@@ -56,10 +58,55 @@ function ClientHomePage(props) {
       history("/login");
     }
     getPackagesInfo();
+    setInterval(() => {
+      setReload((reload) => reload + 1);
+    }, 5000);
   }, []);
+
+  useEffect(() => {
+    const getPackagesInfo = async () => {
+      let token = localStorage.getItem("access-token");
+      if (token === null) {
+        return false;
+      }
+
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      };
+
+      fetch(`${variables.endpoint}/api/user/client-errands`, options)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            return null;
+          }
+        })
+        .then((data) => {
+          if (data === null) {
+            return alert("Something went wrong");
+          }
+          console.log(data);
+          setPackages(data);
+        });
+    };
+
+    if (localStorage.getItem("account-type") !== "client") {
+      history("/login");
+    }
+    getPackagesInfo();
+  }, [reload]);
 
   const received = (item) => {
     return item.status === "received";
+  };
+
+  const notReceived = (item) => {
+    return item.status !== "received";
   };
 
   function slideUp(idPackage) {
@@ -91,6 +138,8 @@ function ClientHomePage(props) {
       options
     ).then((response) => {
       if (response.status === 200) {
+        setReload(reload + 1);
+        slideUp(null);
         return alert("Package status updated");
       } else {
         return alert("Something went wrong");
@@ -129,7 +178,10 @@ function ClientHomePage(props) {
       {/* errands */}
       <div
         style={{
-          color: packages.length === 0 ? colors.lightYellow : colors.lightBlue,
+          color:
+            packages.filter(notReceived).length === 0
+              ? colors.lightYellow
+              : colors.lightBlue,
           fontSize: "2.05rem",
           fontWeight: "bold",
           textShadow: "0.5rem 0.5rem 1rem rgba(0,0,0,0.1)",
@@ -137,7 +189,9 @@ function ClientHomePage(props) {
           textAlign: "center",
         }}
       >
-        {packages.length === 0 ? "No active packages" : "Errands"}
+        {packages.filter(notReceived).length === 0
+          ? "No active packages"
+          : "Errands"}
       </div>
 
       {/* errands List */}
@@ -154,32 +208,22 @@ function ClientHomePage(props) {
             : colors.lightBlue;
 
         // Append ClickMethod if package need finalizing
-        if (packageInfo.status === "delivered") {
-          return (
-            <ListItemComponent
-              clickMethod={() => {
+
+        return (
+          <ListItemComponent
+            clickMethod={() => {
+              if (packageInfo.status === "delivered") {
                 slideUp(packageInfo.package.uuid);
-              }}
-              key={packageInfo.package.uuid}
-              background={background}
-              address={`${packageInfo.package.addressFrom.street} ${packageInfo.package.addressFrom.flatNumber}`}
-              weight={`${packageInfo.package.weight}kg`}
-              distance={`${packageInfo.package.distance}m`}
-              status={packageInfo.status}
-            ></ListItemComponent>
-          );
-        } else {
-          return (
-            <ListItemComponent
-              key={packageInfo.package.uuid}
-              background={background}
-              address={`${packageInfo.package.addressFrom.street} ${packageInfo.package.addressFrom.flatNumber}`}
-              weight={`${packageInfo.package.weight}kg`}
-              distance={`${packageInfo.package.distance}m`}
-              status={packageInfo.status}
-            ></ListItemComponent>
-          );
-        }
+              }
+            }}
+            key={packageInfo.package.uuid}
+            background={background}
+            address={`${packageInfo.package.addressFrom.street} ${packageInfo.package.addressFrom.flatNumber}`}
+            weight={`${packageInfo.package.weight}kg`}
+            distance={`${packageInfo.package.distance}m`}
+            status={packageInfo.status}
+          ></ListItemComponent>
+        );
       })}
 
       {/* History */}
@@ -218,7 +262,7 @@ function ClientHomePage(props) {
           ></ListItemComponent>
         );
       })}
-
+      <WhiteSpacer></WhiteSpacer>
       <DialogSlider ref={sliderRef}>
         <FlexContainer orientation="v" height="100%">
           <Button
